@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Clock Widget</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #4F9768; /* Notion dark green background */
+            flex-direction: column; /* Arrange content in a column */
+        }
+        #text {
+            font-size: 1.5em; /* Smaller font size for the text */
+            margin-bottom: 20px; /* Space between text and clock */
+            color: #636363; /* Light gray color for the text */
+        }
+        #clock {
+            font-size: 4em; /* Larger font size for the clock */
+            color: #000000; /* Ensure the clock is visible */
+        }
+    </style>
+</head>
+<body>
+    <div id="text">time = money</div>
+    <div id="clock">Loading...</div>
+
+    <script>
+        function updateClock() {
+            const now = new Date();
+            let hours = now.getHours();
+            const minutes = String(now.getMinutes()).padStart(2, '0');
+            const seconds = String(now.getSeconds()).padStart(2, '0');
+            const ampm = hours >= 12 ? 'PM' : 'AM';
+            hours = hours % 12;
+            hours = hours ? hours : 12; // the hour '0' should be '12'
+            const timeString = `${hours}:${minutes}:${seconds} ${ampm}`;
+            document.getElementById('clock').innerText = timeString;
+            console.log('Updated clock:', timeString); // Debugging log
+        }
+        setInterval(updateClock, 1000);
+        updateClock(); // Initial call to set the time immediately
+    </script>
+</body>
+</html>
